@@ -2,6 +2,7 @@
 import {Game} from "@/hooks/useGames.ts";
 import PlatformIconList from "@/components/PlatformIconList.tsx";
 import CriticScore from "@/components/CriticScore.tsx";
+import getCroppedImageUrl from "@/services/image-url.ts";
 
 interface GameCardProps {
    game: Game;
@@ -11,7 +12,7 @@ const GameCard = ({game}: GameCardProps) => {
 
    return (
       <Card.Root borderRadius={10} overflow={"hidden"}>
-         <Image src={game.background_image}></Image>
+         <Image src={getCroppedImageUrl(game.background_image)}></Image>
          <Card.Body>
             <Heading fontSize={"2xl"}>{game.name}</Heading>
             <HStack justifyContent="space-between">
