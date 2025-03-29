@@ -6,6 +6,13 @@ export interface Game {
    id: number;
    name: string;
    background_image: string;
+   parent_platforms: [{ platform: Platform }];
+}
+
+export interface Platform {
+   id: number;
+   name: string;
+   slug: string;
 }
 
 interface FetchGameResponse {
@@ -21,7 +28,7 @@ const useGames = () => {
       const controller = new AbortController();
 
       apiClient
-         .get<FetchGameResponse>("/games", { signal: controller.signal })
+         .get<FetchGameResponse>("/games", {signal: controller.signal})
          .then(res => setGames(res.data.results))
          .catch(err => {
             if (err instanceof CanceledError) return;
@@ -29,9 +36,9 @@ const useGames = () => {
          });
 
       return () => controller.abort();
-   }, [])
+   }, []);
 
    return {games, error};
-}
+};
 
 export default useGames;
