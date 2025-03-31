@@ -1,4 +1,5 @@
 ﻿import { Badge } from "@chakra-ui/react";
+import { SiMetacritic } from "react-icons/si";
 
 interface CriticScoreProps {
   score: number | undefined;
@@ -12,9 +13,13 @@ const CriticScore = ({ score }: CriticScoreProps) => {
   }
 
   return (
-    <Badge fontSize="14px" paddingX={2} marginTop={2} marginBottom={3} borderRadius={"4px"}
+    <Badge fontSize="16px" paddingX={2} marginTop={3} marginBottom={3} borderRadius={"4px"}
            colorPalette={color || "yellow"}
-           width="fit-content">{score || "N/A"}</Badge>
+           width="fit-content"
+    >
+      <SiMetacritic />
+      {score || "N/A"}
+    </Badge>
   );
 };
 
