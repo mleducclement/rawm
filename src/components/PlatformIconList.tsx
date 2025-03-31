@@ -2,7 +2,7 @@
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { Flex, HStack, Icon } from "@chakra-ui/react";
+import { Flex, Icon } from "@chakra-ui/react";
 import { Platform } from "@/hooks/useGames.ts";
 import { IconType } from "react-icons";
 
