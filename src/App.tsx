@@ -1,5 +1,5 @@
 import "./App.css";
-import { Grid, GridItem, HStack } from "@chakra-ui/react";
+import { Grid, GridItem, Heading, HStack } from "@chakra-ui/react";
 import NavBar from "@/components/NavBar.tsx";
 import GameGrid from "@/components/GameGrid.tsx";
 import GenreList from "@/components/GenreList.tsx";
@@ -34,6 +34,7 @@ function App() {
         <NavBar onSearch={(searchTerm) => setGameQuery({ ...gameQuery, searchTerm })} />
       </GridItem>
       <GridItem area="aside" hideBelow="lg" paddingX={5} paddingTop={10}>
+        <Heading as="h1" fontSize="xl" marginBottom={3}>Genres</Heading>
         <GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
       </GridItem>
       <GridItem area="main" padding={5}>
