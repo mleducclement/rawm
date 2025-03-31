@@ -2,7 +2,7 @@
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { HStack, Icon } from "@chakra-ui/react";
+import { Flex, HStack, Icon } from "@chakra-ui/react";
 import { Platform } from "@/hooks/useGames.ts";
 import { IconType } from "react-icons";
 
@@ -25,7 +25,10 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
   };
 
   return (
-    <HStack marginY={1}>
+    <Flex
+      wrap="wrap"
+      gap={2}
+      marginY={1}>
       {platforms?.map((platform) => {
         const IconComponent = iconMap[platform.slug];
         return (
@@ -36,7 +39,7 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
           </div>
         );
       })}
-    </HStack>
+    </Flex>
   );
 };
 export default PlatformIconList;
