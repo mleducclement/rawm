@@ -1,15 +1,19 @@
 ﻿import { Badge } from "@chakra-ui/react";
 
 interface CriticScoreProps {
-  score: number;
+  score: number | undefined;
 }
 
 const CriticScore = ({ score }: CriticScoreProps) => {
-  const color = score > 75 ? "green" : score > 50 ? "yellow" : "red";
+  let color = "";
+
+  if (score) {
+    color = score > 75 ? "green" : score > 50 ? "yellow" : "red";
+  }
 
   return (
-    <Badge fontSize="14px" paddingX={2} marginTop={2} borderRadius={"4px"} colorPalette={color}
-           width="fit-content">{score}</Badge>
+    <Badge fontSize="14px" paddingX={2} marginTop={2} borderRadius={"4px"} colorPalette={color || "yellow"}
+           width="fit-content">{score || "N/A"}</Badge>
   );
 };
 

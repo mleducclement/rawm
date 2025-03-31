@@ -1,6 +1,6 @@
-﻿import { FaAndroid, FaApple, FaLinux, FaPlaystation, FaWindows, FaXbox } from "react-icons/fa";
+﻿import { FaAndroid, FaApple, FaLinux, FaPlaystation, FaWindows, FaXbox, FaQuestionCircle } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendo } from "react-icons/si";
+import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { HStack, Icon } from "@chakra-ui/react";
 import { Platform } from "@/hooks/useGames.ts";
@@ -20,7 +20,8 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
     ios: MdPhoneIphone,
     nintendo: SiNintendo,
     web: BsGlobe,
-    linux: FaLinux
+    linux: FaLinux,
+    sega: SiSega
   };
 
   return (
@@ -29,7 +30,7 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
         const IconComponent = iconMap[platform.slug];
         return (
           <div key={platform.id}>
-            <Icon as={iconMap[platform.slug]} color="blue.400" size="md">
+            <Icon as={iconMap[platform.slug] || FaQuestionCircle} color="blue.400" size="md">
               <IconComponent />
             </Icon>
           </div>
