@@ -26,7 +26,7 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
 
   return (
     <HStack marginY={1}>
-      {platforms.map((platform) => {
+      {platforms?.map((platform) => {
         const IconComponent = iconMap[platform.slug];
         return (
           <div key={platform.id}>
