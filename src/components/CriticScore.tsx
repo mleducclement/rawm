@@ -12,7 +12,8 @@ const CriticScore = ({ score }: CriticScoreProps) => {
   }
 
   return (
-    <Badge fontSize="14px" paddingX={2} marginTop={2} borderRadius={"4px"} colorPalette={color || "yellow"}
+    <Badge fontSize="14px" paddingX={2} marginTop={2} marginBottom={3} borderRadius={"4px"}
+           colorPalette={color || "yellow"}
            width="fit-content">{score || "N/A"}</Badge>
   );
 };
