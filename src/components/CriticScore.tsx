@@ -16,6 +16,7 @@ const CriticScore = ({ score }: CriticScoreProps) => {
     <Badge fontSize="16px" paddingX={2} marginTop={3} marginBottom={3} borderRadius={"4px"}
            colorPalette={color || "yellow"}
            width="fit-content"
+           alignSelf="flex-start"
     >
       <SiMetacritic />
       {score || "N/A"}
