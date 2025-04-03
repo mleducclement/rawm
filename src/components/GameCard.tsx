@@ -2,7 +2,7 @@
 import { Game } from "@/hooks/useGames.ts";
 import PlatformIconList from "@/components/PlatformIconList.tsx";
 import CriticScore from "@/components/CriticScore.tsx";
-import getCroppedImageUrl from "@/services/image-url.ts";
+import getCroppedImageUrl from "@/services/imageUrl.ts";
 import Emoji from "@/components/Emoji.tsx";
 
 interface GameCardProps {
