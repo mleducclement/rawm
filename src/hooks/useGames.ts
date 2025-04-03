@@ -1,5 +1,7 @@
-﻿import useData from "@/hooks/useData.ts";
+﻿import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "@/App.tsx";
+import { CACHE_KEY_GAMES } from "@/hooks/constants.ts";
+import apiClient, { FetchResponse } from "@/services/apiClient.ts";
 
 export interface Game {
   id: number;
@@ -17,18 +19,23 @@ export interface Platform {
 }
 
 const useGames = (gameQuery: GameQuery) => {
-  let responseObject = useData<Game>("/games", {
-    params: {
-      genres: gameQuery.genre?.id,
-      parent_platforms: gameQuery.platform?.id,
-      ordering: gameQuery.sortOrder,
-      search: gameQuery.searchTerm
-    }
-  }, [gameQuery]);
+  const response = useQuery({
+    queryKey: [CACHE_KEY_GAMES, gameQuery],
+    queryFn: () => apiClient
+      .get<FetchResponse<Game>>("/games", {
+        params: {
+          genres: gameQuery.genre?.id,
+          parent_platforms: gameQuery.platform?.id,
+          ordering: gameQuery.sortOrder,
+          search: gameQuery.searchTerm
+        }
+      }).then(res => res.data),
+    staleTime: 60 * 60 * 1000
+  });
 
   if (gameQuery?.sortOrder) {
     // Needed since RAWG sort games with metacritic null above everything
-    const data = responseObject.data.sort((a, b) => {
+    const sortedResults = response?.data?.results.sort((a, b) => {
       // both have score, return normal order
       if (a.metacritic && b.metacritic) return 0;
 
@@ -39,10 +46,13 @@ const useGames = (gameQuery: GameQuery) => {
       return 0;
     });
 
-    responseObject = { ...responseObject, data };
+    return {
+      ...response, data: {
+        results: sortedResults
+      }
+    };
   }
-
-  return responseObject;
+  return response;
 };
 
 export default useGames;
