@@ -2,6 +2,7 @@
 import { GameQuery } from "@/App.tsx";
 import { CACHE_KEY_GAMES } from "@/hooks/constants.ts";
 import apiClient, { FetchResponse } from "@/services/apiClient.ts";
+import { Platform } from "@/hooks/usePlatforms.ts";
 
 export interface Game {
   id: number;
@@ -10,12 +11,6 @@ export interface Game {
   parent_platforms: [{ platform: Platform }];
   metacritic?: number;
   rating_top: number;
-}
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
 }
 
 const useGames = (gameQuery: GameQuery) => {
