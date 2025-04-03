@@ -1,8 +1,7 @@
 ﻿import platforms from "../data/platforms.ts";
 import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_PLATFORMS } from "@/hooks/constants.ts";
-import apiClient from "@/services/apiClient.ts";
-import { FetchResponse } from "@/hooks/useData.ts";
+import apiClient, { FetchResponse } from "@/services/apiClient.ts";
 
 export interface Platform {
   id: number;
