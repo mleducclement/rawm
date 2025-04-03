@@ -1,9 +1,9 @@
 ﻿import { Card, Flex, Heading, Image } from "@chakra-ui/react";
-import { Game } from "@/hooks/useGames.ts";
 import PlatformIconList from "@/components/PlatformIconList.tsx";
 import CriticScore from "@/components/CriticScore.tsx";
 import getCroppedImageUrl from "@/services/imageUrl.ts";
 import Emoji from "@/components/Emoji.tsx";
+import { Game } from "@/services/gameService";
 
 interface GameCardProps {
   game: Game;

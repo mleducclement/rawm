@@ -1,10 +1,9 @@
 ﻿import { APIClient } from "@/services/apiClient.ts";
 
-export interface Genre {
+export interface Platform {
   id: number;
   name: string;
   slug: string;
-  image_background: string;
 }
 
-export default new APIClient<Genre>("/genres");
+export default new APIClient<Platform>("/platforms/list/parent_platforms");
