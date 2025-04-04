@@ -4,6 +4,7 @@ import { GameQuery } from "@/App.tsx";
 import { CACHE_KEY_GAMES } from "@/hooks/constants.ts";
 import gameService, { Game } from "@/services/gameService.ts";
 import { FetchResponse } from "@/services/apiClient.ts";
+import { ms } from "@/utils/time.ts";
 
 const useGames = (gameQuery: GameQuery) => {
   return useInfiniteQuery<FetchResponse<Game>, Error>({
@@ -20,7 +21,8 @@ const useGames = (gameQuery: GameQuery) => {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
-    }
+    },
+    staleTime: ms("1d")
   });
 };
 
