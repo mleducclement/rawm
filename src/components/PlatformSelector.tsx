@@ -4,12 +4,13 @@ import usePlatforms from "@/hooks/usePlatforms.ts";
 import { Platform } from "@/services/platformService.ts";
 
 interface Props {
-  selectedPlatform: Platform | null;
+  selectedPlatformId?: number;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
+const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const { data, error } = usePlatforms();
+  const selectedPlatform = data.results.find((platform) => platform.id === selectedPlatformId);
 
   if (error) return null;
 
@@ -23,8 +24,12 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
       <Portal>
         <Menu.Positioner>
           <Menu.Content>
-            {data?.results.map(platform => <Menu.Item onClick={() => onSelectPlatform(platform)} key={platform.id}
-                                                      value={platform.id.toString()}>{platform.name}</Menu.Item>)}
+            {data?.results.map(platform =>
+              <Menu.Item
+                onClick={() => onSelectPlatform(platform)}
+                key={platform.id}
+                value={platform.id.toString()}>{platform.name}
+              </Menu.Item>)}
           </Menu.Content>
         </Menu.Positioner>
       </Portal>

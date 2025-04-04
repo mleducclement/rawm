@@ -4,11 +4,11 @@ import useGenres from "@/hooks/useGenres.ts";
 import { Genre } from "@/services/genreService.ts";
 
 interface Props {
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
   onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
   const { data, error, isLoading } = useGenres();
 
   if (error) return null;
@@ -21,7 +21,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         <List.Item key={genre.id} paddingY="5px" fontSize="lg">
           <HStack>
             <Image boxSize="32px" borderRadius={8} src={getCroppedImageUrl(genre.image_background)} objectFit="cover" />
-            <Link fontSize="lg" fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+            <Link fontSize="lg" fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                   variant="plain" padding={1}
                   style={{ textDecoration: "none" }}
                   onClick={() => onSelectGenre(genre)}>{genre.name}</Link>

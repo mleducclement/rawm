@@ -10,8 +10,8 @@ const useGames = (gameQuery: GameQuery) => {
     queryKey: [CACHE_KEY_GAMES, gameQuery],
     queryFn: ({ pageParam }) => gameService.get({
       params: {
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
+        genres: gameQuery.genreId,
+        parent_platforms: gameQuery.platformId,
         ordering: gameQuery.sortOrder,
         search: gameQuery.searchTerm,
         page: pageParam
