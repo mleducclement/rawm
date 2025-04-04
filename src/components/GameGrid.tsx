@@ -29,11 +29,9 @@ const GameGrid = ({ gameQuery }: Props) => {
 
     if (isFetchingNextPage) return;
 
-    if (!hasNextPage) return;
-
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && hasNextPage) {
         fetchNextPage().catch((err) => {
           console.log("error fetching next page", err);
         });
