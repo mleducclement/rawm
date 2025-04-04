@@ -1,6 +1,6 @@
-﻿import { Fragment, useCallback, useRef } from "react";
+﻿import { Fragment } from "react";
 
-import { Box, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 
 import GameCard from "@/components/GameCard.tsx";
 import GameCardSkeleton from "@/components/GameCardSkeleton.tsx";
@@ -8,6 +8,8 @@ import GameCardContainer from "@/components/GameCardContainer.tsx";
 import { GameQuery } from "@/App.tsx";
 import useGames from "@/hooks/useGames.ts";
 import { Game } from "@/services/gameService.ts";
+import { useResponsiveSkeletons } from "@/hooks/useResponsiveSkeletons.ts";
+import { useInfiniteScrolling } from "@/hooks/useInfiniteScrolling.ts";
 
 interface Props {
   gameQuery: GameQuery;
@@ -22,23 +24,9 @@ const GameGrid = ({ gameQuery }: Props) => {
     fetchNextPage,
     hasNextPage
   } = useGames(gameQuery);
-  const skeletons = [1, 2, 3, 4, 5, 6];
 
-  const observer = useRef<IntersectionObserver | null>(null);
-  const lastElementRef = useCallback((node: Element) => {
-
-    if (isFetchingNextPage) return;
-
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasNextPage) {
-        fetchNextPage().catch((err) => {
-          console.log("error fetching next page", err);
-        });
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, [isFetchingNextPage, hasNextPage]);
+  const { initialSkeletons, scrollingSkeletons } = useResponsiveSkeletons();
+  const lastElementRef = useInfiniteScrolling({ isFetchingNextPage, fetchNextPage, hasNextPage });
 
   if (error) return <Text>{error.message}</Text>;
 
@@ -50,10 +38,11 @@ const GameGrid = ({ gameQuery }: Props) => {
         columnGap={6}
         marginTop={4}
       >
-        {isLoading && skeletons.map(skeleton =>
-          <GameCardContainer key={skeleton}>
-            <GameCardSkeleton key={skeleton} />
-          </GameCardContainer>)}
+        {isLoading && initialSkeletons.map((_, index) =>
+          <GameCardContainer key={index}>
+            <GameCardSkeleton />
+          </GameCardContainer>)
+        }
 
         {data?.pages.map((page, index) =>
           <Fragment key={index}>
@@ -68,12 +57,11 @@ const GameGrid = ({ gameQuery }: Props) => {
             })}
           </Fragment>
         )}
+        {isFetchingNextPage && scrollingSkeletons.map(skeleton =>
+          <GameCardContainer key={skeleton}>
+            <GameCardSkeleton key={skeleton} />
+          </GameCardContainer>)}
       </SimpleGrid>
-      {isFetchingNextPage && (
-        <Box display="flex" margin="0 auto" justifyContent="center">
-          <Spinner size="xl" />
-        </Box>
-      )}
     </>
   );
 };
