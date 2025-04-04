@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_PLATFORMS } from "@/hooks/constants.ts";
 import platformService from "@/services/platformService.ts";
 
-
 const usePlatforms = () =>
   useQuery({
     queryKey: CACHE_KEY_PLATFORMS,

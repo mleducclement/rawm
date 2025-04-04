@@ -22,26 +22,6 @@ const useGames = (gameQuery: GameQuery) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     }
   });
-
-  // if (gameQuery?.sortOrder) {
-  //   // Needed since RAWG sort games with metacritic null above everything
-  //   const sortedResults = response?.data?.results.sort((a, b) => {
-  //     // both have score, return normal order
-  //     if (a.metacritic && b.metacritic) return 0;
-  //
-  //     if (!a.metacritic) return 1;
-  //
-  //     if (!b.metacritic) return -1;
-  //
-  //     return 0;
-  //   });
-  //
-  //   return {
-  //     ...response, data: {
-  //       results: sortedResults
-  //     }
-  //   };
-  // }
 };
 
 export default useGames;
