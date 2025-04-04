@@ -6,9 +6,9 @@ import genres from "../data/genres.ts";
 const useGenres = () =>
   useQuery({
     queryKey: CACHE_KEY_GENRES,
-    queryFn: () => genreService.get(),
+    queryFn: genreService.get,
     staleTime: 24 * 60 * 60 * 1000, // 24h
-    initialData: { count: genres.length, results: genres }
+    initialData: genres
   });
 
 

@@ -2,6 +2,7 @@
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "@/hooks/usePlatforms.ts";
 import { Platform } from "@/services/platformService.ts";
+import useGenre from "@/hooks/useGenre.ts";
 
 interface Props {
   selectedPlatformId?: number;
@@ -10,7 +11,7 @@ interface Props {
 
 const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const { data, error } = usePlatforms();
-  const selectedPlatform = data.results.find((platform) => platform.id === selectedPlatformId);
+  const selectedPlatform = useGenre(selectedPlatformId);
 
   if (error) return null;
 
