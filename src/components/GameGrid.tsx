@@ -9,7 +9,7 @@ import { GameQuery } from "@/App.tsx";
 import useGames from "@/hooks/useGames.ts";
 import { Game } from "@/services/gameService.ts";
 import { useResponsiveSkeletons } from "@/hooks/useResponsiveSkeletons.ts";
-import { useInfiniteScrolling } from "@/hooks/useInfiniteScrolling.ts";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   gameQuery: GameQuery;
@@ -20,24 +20,39 @@ const GameGrid = ({ gameQuery }: Props) => {
     data,
     error,
     isLoading,
-    isFetchingNextPage,
     fetchNextPage,
     hasNextPage
   } = useGames(gameQuery);
 
   const { initialSkeletons, scrollingSkeletons } = useResponsiveSkeletons();
-  const lastElementRef = useInfiniteScrolling({ isFetchingNextPage, fetchNextPage, hasNextPage });
 
   if (error) return <Text>{error.message}</Text>;
 
+  const fetchedGamesCount = data?.pages.reduce((acc, page) => acc + page.results.length, 0) || 0;
+
+  const gridProps = {
+    columns: { sm: 1, md: 2, lg: 3, xl: 4 },
+    rowGap: 6,
+    columnGap: 6,
+    marginTop: 4
+  };
+
   return (
-    <>
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        rowGap={6}
-        columnGap={6}
-        marginTop={4}
-      >
+    <InfiniteScroll
+      dataLength={fetchedGamesCount}
+      hasMore={hasNextPage}
+      next={() => fetchNextPage()}
+      loader={
+        <SimpleGrid {...gridProps}>
+          {scrollingSkeletons.map(skeleton =>
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton key={skeleton} />
+            </GameCardContainer>
+          )}
+        </SimpleGrid>
+      }
+    >
+      <SimpleGrid {...gridProps}>
         {isLoading && initialSkeletons.map((_, index) =>
           <GameCardContainer key={index}>
             <GameCardSkeleton />
@@ -46,23 +61,17 @@ const GameGrid = ({ gameQuery }: Props) => {
 
         {data?.pages.map((page, index) =>
           <Fragment key={index}>
-            {page.results.map((game: Game, index) => {
-              const isLastElement = page.results.length === index + 1;
-
+            {page.results.map((game: Game) => {
               return (
-                <GameCardContainer key={game.id} ref={isLastElement ? lastElementRef : undefined}>
+                <GameCardContainer key={game.id}>
                   <GameCard game={game} />
                 </GameCardContainer>
               );
             })}
           </Fragment>
         )}
-        {isFetchingNextPage && scrollingSkeletons.map(skeleton =>
-          <GameCardContainer key={skeleton}>
-            <GameCardSkeleton key={skeleton} />
-          </GameCardContainer>)}
       </SimpleGrid>
-    </>
+    </InfiniteScroll>
   );
 };
 
