@@ -5,24 +5,19 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "@/components/GameCard.tsx";
 import GameCardSkeleton from "@/components/GameCardSkeleton.tsx";
 import GameCardContainer from "@/components/GameCardContainer.tsx";
-import { GameQuery } from "@/App.tsx";
 import useGames from "@/hooks/useGames.ts";
 import { Game } from "@/services/gameService.ts";
 import { useResponsiveSkeletons } from "@/hooks/useResponsiveSkeletons.ts";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-const GameGrid = ({ gameQuery }: Props) => {
+const GameGrid = () => {
   const {
     data,
     error,
     isLoading,
     fetchNextPage,
     hasNextPage
-  } = useGames(gameQuery);
+  } = useGames();
 
   const { initialSkeletons, scrollingSkeletons } = useResponsiveSkeletons();
 
