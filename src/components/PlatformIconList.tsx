@@ -4,7 +4,8 @@ import { SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { Flex, Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import { Platform } from "@/services/platformService.ts";
+
+import { Platform } from "@/entities/platform.ts";
 
 interface PlatformIconListProps {
   platforms: Platform[];

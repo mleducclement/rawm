@@ -7,9 +7,9 @@ import GameCard from "@/components/GameCard.tsx";
 import GameCardSkeleton from "@/components/GameCardSkeleton.tsx";
 import GameCardContainer from "@/components/GameCardContainer.tsx";
 import useGames from "@/hooks/useGames.ts";
-import { Game } from "@/services/gameService.ts";
 import { useResponsiveSkeletons } from "@/hooks/useResponsiveSkeletons.ts";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Game } from "@/entities/game.ts";
 
 const GameGrid = () => {
   const {

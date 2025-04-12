@@ -3,9 +3,10 @@
 import useGameQueryStore from "@/stores/store.ts";
 
 import { CACHE_KEY_GAMES } from "@/hooks/constants.ts";
-import gameService, { Game } from "@/services/gameService.ts";
+import gameService from "@/services/gameService.ts";
 import { FetchResponse } from "@/services/apiClient.ts";
 import { ms } from "@/utils/time.ts";
+import { Game } from "@/entities/game.ts";
 
 const useGames = () => {
   const gameQuery = useGameQueryStore(s => s.gameQuery);

@@ -1,9 +1,4 @@
 ﻿import { APIClient } from "@/services/apiClient.ts";
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platform } from "@/entities/platform.ts";
 
 export default new APIClient<Platform>("/platforms/lists/parents");

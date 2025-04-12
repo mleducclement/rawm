@@ -3,7 +3,8 @@ import PlatformIconList from "@/components/PlatformIconList.tsx";
 import CriticScore from "@/components/CriticScore.tsx";
 import getCroppedImageUrl from "@/services/imageUrl.ts";
 import Emoji from "@/components/Emoji.tsx";
-import { Game } from "@/services/gameService";
+
+import { Game } from "@/entities/game.ts";
 
 interface GameCardProps {
   game: Game;
