@@ -14,7 +14,7 @@ const SearchInput = () => {
       if (ref.current) setSearchText(ref.current.value);
     }}>
       <Flex justifyContent="center">
-        <InputGroup width="50%" startElement={<BsSearch size="20px" />}>
+        <InputGroup startElement={<BsSearch size="20px" />}>
           <Input fontSize="1.2rem" ref={ref} borderRadius={20} placeholder="Search games..." variant="subtle" />
         </InputGroup>
       </Flex>
