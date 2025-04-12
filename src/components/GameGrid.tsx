@@ -1,5 +1,6 @@
 ﻿import { Fragment } from "react";
 
+import { Link } from "react-router-dom";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 
 import GameCard from "@/components/GameCard.tsx";
@@ -29,7 +30,8 @@ const GameGrid = () => {
     columns: { sm: 1, md: 2, lg: 3, xl: 4 },
     rowGap: 6,
     columnGap: 6,
-    marginTop: 4
+    marginTop: 4,
+    padding: 2
   };
 
   return (
@@ -59,7 +61,9 @@ const GameGrid = () => {
             {page.results.map((game: Game) => {
               return (
                 <GameCardContainer key={game.id}>
-                  <GameCard game={game} />
+                  <Link to={`games/${game.slug}`}>
+                    <GameCard game={game} />
+                  </Link>
                 </GameCardContainer>
               );
             })}

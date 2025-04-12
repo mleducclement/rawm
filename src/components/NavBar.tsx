@@ -2,11 +2,14 @@
 import ColorModeSwitch from "@/components/ColorModeSwitch.tsx";
 import logo from "../assets/logo.webp";
 import SearchInput from "@/components/SearchInput.tsx";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <HStack justifyContent="space-between" padding="10px">
-      <Image src={logo} boxSize="60px" />
+      <Link to="/">
+        <Image src={logo} boxSize="60px" />
+      </Link>
       <SearchInput />
       <ColorModeSwitch />
     </HStack>
