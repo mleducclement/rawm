@@ -2,10 +2,11 @@
 import { Heading, Spinner } from "@chakra-ui/react";
 
 import useGame from "@/hooks/useGame.ts";
-import ExpandableText from "@/components/ExpandableText.tsx";
 import { extractEnglishDescription } from "@/utils/text.ts";
+import ExpandableText from "@/components/ExpandableText.tsx";
 import GameAttributes from "@/components/GameAttributes.tsx";
 import GameTrailer from "@/components/GameTrailer.tsx";
+import Gallery from "@/components/Gallery.tsx";
 
 // TODO: Improve visuals
 
@@ -25,6 +26,7 @@ const GameDetailPage = () => {
       <ExpandableText limit={250}>{englishDescription}</ExpandableText>
       <GameAttributes game={game} />
       <GameTrailer gameId={game.id} />
+      <Gallery gameId={game.id} />
     </>
   );
 };
