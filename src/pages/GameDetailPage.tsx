@@ -5,6 +5,7 @@ import useGame from "@/hooks/useGame.ts";
 import ExpandableText from "@/components/ExpandableText.tsx";
 import { extractEnglishDescription } from "@/utils/text.ts";
 import GameAttributes from "@/components/GameAttributes.tsx";
+import GameTrailer from "@/components/GameTrailer.tsx";
 
 // TODO: Improve visuals
 
@@ -22,7 +23,8 @@ const GameDetailPage = () => {
     <>
       <Heading>{game.name}</Heading>
       <ExpandableText limit={250}>{englishDescription}</ExpandableText>
-      <GameAttributes game={game}/>
+      <GameAttributes game={game} />
+      <GameTrailer gameId={game.id} />
     </>
   );
 };

@@ -26,7 +26,7 @@ export class APIClient<T> {
 
   getById = async (id: number | string) => {
     return (await instance.get<T>(this.endpoint + "/" + id)).data;
-  }
+  };
 }
 
 export default APIClient;
