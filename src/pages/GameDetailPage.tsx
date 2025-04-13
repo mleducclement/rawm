@@ -4,6 +4,9 @@ import { Heading, Spinner } from "@chakra-ui/react";
 import useGame from "@/hooks/useGame.ts";
 import ExpandableText from "@/components/ExpandableText.tsx";
 import { extractEnglishDescription } from "@/utils/text.ts";
+import GameAttributes from "@/components/GameAttributes.tsx";
+
+// TODO: Improve visuals
 
 const GameDetailPage = () => {
   const { slug } = useParams();
@@ -19,6 +22,7 @@ const GameDetailPage = () => {
     <>
       <Heading>{game.name}</Heading>
       <ExpandableText limit={250}>{englishDescription}</ExpandableText>
+      <GameAttributes game={game}/>
     </>
   );
 };
