@@ -1,4 +1,4 @@
-﻿import { Game } from "@/entities/game.ts";
+﻿import Game from "@/entities/game.ts";
 import DefinitionItem from "@/components/DefinitionItem.tsx";
 import { List, SimpleGrid } from "@chakra-ui/react";
 import CriticScore from "@/components/CriticScore.tsx";
@@ -38,4 +38,3 @@ const GameAttributes = ({ game }: Props) => {
 
 
 export default GameAttributes;
-;

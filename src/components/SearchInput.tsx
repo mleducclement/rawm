@@ -1,4 +1,4 @@
-﻿import { Flex, Input, InputGroup } from "@chakra-ui/react";
+﻿import { Input, InputGroup } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 import { useRef } from "react";
 import useGameQueryStore from "@/stores/store.ts";
@@ -17,11 +17,9 @@ const SearchInput = () => {
         navigate("/");
       }
     }}>
-      <Flex justifyContent="center">
-        <InputGroup startElement={<BsSearch size="20px" />}>
-          <Input fontSize="1.2rem" ref={ref} borderRadius={20} placeholder="Search games..." variant="subtle" />
-        </InputGroup>
-      </Flex>
+      <InputGroup startElement={<BsSearch size="20px" />}>
+        <Input fontSize="1.2rem" ref={ref} borderRadius={20} placeholder="Search games..." variant="subtle" />
+      </InputGroup>
     </form>
   );
 };

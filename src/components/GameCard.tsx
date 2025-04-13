@@ -4,7 +4,7 @@ import CriticScore from "@/components/CriticScore.tsx";
 import getCroppedImageUrl from "@/services/imageUrl.ts";
 import Emoji from "@/components/Emoji.tsx";
 
-import { Game } from "@/entities/game.ts";
+import Game from "@/entities/game.ts";
 
 interface GameCardProps {
   game: Game;
